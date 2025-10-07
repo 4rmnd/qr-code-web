@@ -170,18 +170,18 @@ export default function QRDownload({ data, style }: QRDownloadProps) {
   if (!qrValue) return null;
 
   return (
-    <div className="space-y-3 md:space-y-4">
-      <h3 className="text-base md:text-lg font-semibold text-gray-800">Download QR Code</h3>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-gray-800">Download QR Code</h3>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {/* Dropdown untuk format file */}
         <div>
-          <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Format File</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Format File</label>
           <div className="relative">
             <select
               value={selectedFormat}
               onChange={(e) => setSelectedFormat(e.target.value as typeof fileFormats[number]['value'])}
-              className="w-full px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none text-xs sm:text-sm"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
             >
               {fileFormats.map((format) => (
                 <option key={format.value} value={format.value}>
@@ -189,18 +189,18 @@ export default function QRDownload({ data, style }: QRDownloadProps) {
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
           </div>
         </div>
         
         {/* Dropdown untuk ukuran file */}
         <div>
-          <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Ukuran File</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Ukuran File</label>
           <div className="relative">
             <select
               value={selectedSize}
               onChange={(e) => setSelectedSize(e.target.value as typeof fileSizes[number]['value'])}
-              className="w-full px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none text-xs sm:text-sm"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
             >
               {fileSizes.map((size) => (
                 <option key={size.value} value={size.value}>
@@ -208,7 +208,7 @@ export default function QRDownload({ data, style }: QRDownloadProps) {
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
           </div>
         </div>
       </div>
@@ -218,10 +218,9 @@ export default function QRDownload({ data, style }: QRDownloadProps) {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => downloadQR(selectedFormat)}
-        disabled={!qrValue}
-        className="w-full flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs sm:text-sm disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
       >
-        <Download className="w-4 h-4 sm:w-5 sm:h-5" />
+        <Download className="w-5 h-5" />
         <span className="font-medium">Download QR Code</span>
       </motion.button>
     </div>

@@ -20,12 +20,12 @@ export default function QRStyleCustomizer({ style, onChange }: QRStyleCustomizer
     <div className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-3">Color Mode</label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-wrap gap-2">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onChange({ ...style, colorMode: 'single' })}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`flex-1 min-w-[120px] px-4 py-2 rounded-lg transition-all ${
               style.colorMode === 'single'
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -37,7 +37,7 @@ export default function QRStyleCustomizer({ style, onChange }: QRStyleCustomizer
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onChange({ ...style, colorMode: 'gradient' })}
-            className={`px-4 py-2 rounded-lg transition-all ${
+            className={`flex-1 min-w-[120px] px-4 py-2 rounded-lg transition-all ${
               style.colorMode === 'gradient'
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -125,7 +125,7 @@ export default function QRStyleCustomizer({ style, onChange }: QRStyleCustomizer
           </div>
         </div>
       ) : style.colorMode === 'single' ? (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Foreground Color</label>
             <div className="flex items-center gap-2">
@@ -219,7 +219,7 @@ export default function QRStyleCustomizer({ style, onChange }: QRStyleCustomizer
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-3">Logo</label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-wrap gap-2">
           {logoTypes.map(({ value, label }) => (
             <motion.button
               key={value}
@@ -227,7 +227,7 @@ export default function QRStyleCustomizer({ style, onChange }: QRStyleCustomizer
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => onChange({ ...style, logo: value })}
-              className={`px-3 py-2 rounded-lg text-sm transition-all ${
+              className={`flex-1 min-w-[100px] px-3 py-2 rounded-lg text-sm transition-all ${
                 style.logo === value
                   ? 'bg-blue-500 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

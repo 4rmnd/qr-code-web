@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { QRData, QRStyle } from '../types/qr';
 import { generateQRValue, logoUrls } from '../utils/qrGenerator';
@@ -12,10 +12,33 @@ interface QRCodePreviewProps {
 export default function QRCodePreview({ data, style }: QRCodePreviewProps) {
   const qrValue = generateQRValue(data);
   const svgRef = useRef<HTMLDivElement>(null);
+  const [qrSize, setQrSize] = useState(280);
   
   // Validasi data QR
   const validationResult = validateQRData(data);
   const isDataValid = validationResult.isValid;
+  
+  // Menangani responsivitas QR code
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 480) {
+        setQrSize(180);
+      } else if (window.innerWidth < 640) {
+        setQrSize(200);
+      } else if (window.innerWidth < 768) {
+        setQrSize(240);
+      } else {
+        setQrSize(280);
+      }
+    };
+    
+    handleResize(); // Set ukuran awal
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const getLogoUrl = () => {
     if (style.logo === 'none') return undefined;
@@ -92,27 +115,29 @@ export default function QRCodePreview({ data, style }: QRCodePreviewProps) {
   const logoUrl = getLogoUrl();
 
   return (
-    <div ref={svgRef} className="flex items-center justify-center p-8 bg-white rounded-2xl shadow-sm">
-      <QRCodeSVG
-        value={qrValue}
-        size={280}
-        level="H"
-        includeMargin={true}
-        fgColor={getFgColor()}
-        bgColor={style.bgColor}
-        imageSettings={
-          logoUrl
-            ? {
-                src: logoUrl,
-                x: undefined,
-                y: undefined,
-                height: 40,
-                width: 40,
-                excavate: needsWhiteBackground(),
-              }
-            : undefined
-        }
-      />
+    <div ref={svgRef} className="flex items-center justify-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl shadow-sm">
+      <div className="w-full max-w-[280px] mx-auto">
+        <QRCodeSVG
+          value={qrValue}
+          size={qrSize}
+          level="H"
+          includeMargin={true}
+          fgColor={getFgColor()}
+          bgColor={style.bgColor}
+          imageSettings={
+            logoUrl
+              ? {
+                  src: logoUrl,
+                  x: undefined,
+                  y: undefined,
+                  height: 40,
+                  width: 40,
+                  excavate: needsWhiteBackground(),
+                }
+              : undefined
+          }
+        />
+      </div>
     </div>
   );
 }
