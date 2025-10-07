@@ -20,21 +20,21 @@ const qrTypes = [
 
 export default function QRTypeSelector({ selectedType, onSelect }: QRTypeSelectorProps) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
       {qrTypes.map(({ type, label, icon: Icon }) => (
         <motion.button
           key={type}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelect(type)}
-          className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+          className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
             selectedType === type
               ? 'border-blue-500 bg-blue-50 text-blue-700'
               : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
           }`}
         >
-          <Icon className="w-6 h-6 mx-auto mb-2" />
-          <span className="text-sm font-medium">{label}</span>
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2" />
+          <span className="text-xs sm:text-sm font-medium">{label}</span>
         </motion.button>
       ))}
     </div>
